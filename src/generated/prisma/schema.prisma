@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model FormSubmission {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String   @unique
+  branch      String
+  reg         String   @unique
+  phone       String
+  priority    Priority
+  reason      String
+  domain      Domain
+  bestProject String
+  createdAt   DateTime @default(now())
+}
+
+enum Priority {
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
+}
+
+enum Domain {
+  WEB_DEVELOPMENT
+  FLUTTER
+  AI_ML
+  CLOUD
+  BLOCKCHAIN
+  ANDROID
+  OUTREACH
+  UI_UX
+}
